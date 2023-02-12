@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/veandco/go-sdl2/sdl"
 	"image/color"
 )
@@ -39,7 +38,6 @@ func (c *Camera) Render() {
 			//shoot ray from camera into world and if ray intersects tri than print a character
 			surface.Set(x, y, c.ShootRay(c.PixelToRay(x, y)))
 		}
-		fmt.Printf("\n")
 	}
 
 }
