@@ -73,9 +73,6 @@ func (c *Camera) ShootRay(dir Vector3) color.Color {
 
 	for _, tri := range c.World.Tris {
 		if r.IntersectsTri(tri) {
-
-			// make triangle color random seeded on its index
-
 			return tri.Color
 		}
 	}
@@ -114,6 +111,11 @@ func (r *Ray) IntersectsTri(tri Tri) bool {
 	A = tri.p1.Sub(tri.p3)
 	B = intersection.Sub(tri.p3)
 	E := A.Cross(B)
+
+	//get rid of case where intersection point is on edge of tri
+	if C.Dot(D) == 0 || D.Dot(E) == 0 || E.Dot(C) == 0 {
+		return false
+	}
 
 	// if all cross products have same sign than intersection point is inside tri
 	if C.Dot(D) >= 0 && D.Dot(E) >= 0 {
